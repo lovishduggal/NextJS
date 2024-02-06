@@ -1,8 +1,11 @@
+import './global.css';
+import NavBar from '../components/NavBar';
+
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body>
-                <h1>Here is my nav bar</h1>
+            <body className="bg-gray-100">
+                <NavBar></NavBar>
                 {children}
             </body>
         </html>
