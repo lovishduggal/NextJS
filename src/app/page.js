@@ -1,5 +1,6 @@
 import ProductCard from '../components/ProductCard';
 import ShareBtn from '../components/ShareBtn';
+import Link from 'next/link';
 
 function Page() {
     return (
@@ -18,6 +19,11 @@ function Page() {
                 <ProductCard />
                 <ProductCard />
             </div>
+            <Link
+                href="/products"
+                className="inline-block text-orange-400 p-4 font-bold hover:underline">
+                View All {'>'}
+            </Link>
         </div>
     );
 }
