@@ -1,19 +1,19 @@
 import Link from 'next/link';
 
-const ProductCard = () => {
+const ProductCard = ({ item }) => {
     return (
         <Link
-            href="/products/p1"
+            href={`/products/${item?.id}`}
             className="w-full sm:w-64 h-62 rounded border border-gray-200 hover:cursor-pointer hover:shadow-xl">
-            <img src="/images/1.png" className="w-full h-40" />
+            <img src={item?.images[0]} className="w-full h-40" />
             <div className="flex justify-between p-2">
                 <div>
-                    <h1 className="font-bold">Coding shirt 1</h1>
-                    <p className="w-40 truncate">
-                        this is description very long very very long
-                    </p>
+                    <h1 className="font-bold">{item?.name}</h1>
+                    <p className="w-40 truncate">{item?.description}</p>
                 </div>
-                <div className="text-green-500 py-2 font-bold">20000</div>
+                <div className="text-green-500 py-2 font-bold">
+                    ₹{item.default_price.unit_amount / 100}
+                </div>
             </div>
         </Link>
     );

@@ -1,8 +1,10 @@
 import ProductCard from '../components/ProductCard';
 import ShareBtn from '../components/ShareBtn';
 import Link from 'next/link';
+import { getProducts } from '../services/productService';
 
-function Page() {
+async function Page() {
+    const products = await getProducts(5);
     return (
         <div>
             <div className="bg-gray-900 h-72">
@@ -13,12 +15,13 @@ function Page() {
                     for <span className="text-rose-500">coders!</span>
                 </h1>
             </div>
-            <div className="m-4 flex flex-wrap gap-2">
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
+
+            <div className="m-4 flex flex-wrap gap-2 justify-center">
+                {products.data.map((item) => (
+                    <ProductCard item={item} />
+                ))}
             </div>
+
             <Link
                 href="/products"
                 className="inline-block text-orange-400 p-4 font-bold hover:underline">
