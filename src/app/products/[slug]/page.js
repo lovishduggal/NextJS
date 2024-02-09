@@ -1,7 +1,15 @@
 import { CheckIcon } from '@heroicons/react/24/solid';
 import ShareBtn from '../../../components/ShareBtn';
 import AddToCart from '../../../components/AddToCart';
-import { getProductById } from '../../../services/productService';
+import { getProducts, getProductById } from '../../../services/productService';
+
+export async function generateStaticParams() {
+    const products = await getProducts(10);
+    return products.data.map((item) => ({
+        slug: item.id,
+    }));
+}
+
 export async function generateMetadata({ params: { slug } }) {
     const product = await getProductById(slug);
     return {
