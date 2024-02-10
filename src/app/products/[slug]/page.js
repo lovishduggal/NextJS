@@ -2,6 +2,7 @@ import { CheckIcon } from '@heroicons/react/24/solid';
 import ShareBtn from '../../../components/ShareBtn';
 import AddToCart from '../../../components/AddToCart';
 import { getProducts, getProductById } from '../../../services/productService';
+import Image from 'next/image';
 
 export async function generateStaticParams() {
     const products = await getProducts(10);
@@ -22,7 +23,13 @@ const Product1 = async ({ params: { slug } }) => {
         <div className="m-2 px-20">
             <div className="flex justify-around items-center flex-wrap gap-5">
                 <div className="w-80 h-80">
-                    <img src={product.images[0]} className="w-full h-auto" />
+                    <Image
+                        priority
+                        width={160}
+                        height={160}
+                        src={product.images[0]}
+                        className="w-full h-auto"
+                    />
                 </div>
                 <div className="flex-1 max-w-md border rounded-md shadow-lg p-6 bg-white">
                     <h2 className="text-3xl font-semibold">{product.name}</h2>
@@ -42,6 +49,7 @@ const Product1 = async ({ params: { slug } }) => {
                 </div>
             </div>
             <p className="mt-8 text-2xl">{product.description}</p>
+            
         </div>
     );
 };

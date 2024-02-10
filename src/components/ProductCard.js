@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 const ProductCard = ({ item }) => {
@@ -5,7 +6,12 @@ const ProductCard = ({ item }) => {
         <Link
             href={`/products/${item?.id}`}
             className="w-full sm:w-64 h-62 rounded border border-gray-200 hover:cursor-pointer hover:shadow-xl">
-            <img src={item?.images[0]} className="w-full h-40" />
+            <Image
+                src={item?.images[0]}
+                width={160}
+                height={160}
+                className="w-full h-40"
+            />
             <div className="flex justify-between p-2">
                 <div>
                     <h1 className="font-bold">{item?.name}</h1>
