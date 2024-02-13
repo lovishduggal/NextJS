@@ -17,8 +17,8 @@ async function Page() {
             </div>
 
             <div className="m-4 flex flex-wrap gap-2 justify-center">
-                {products.data.map((item) => (
-                    <ProductCard key={item.id} item={item} />
+                {products.data.map((item, index) => (
+                    <ProductCard key={item.id} item={item} index={index} />
                 ))}
             </div>
 

@@ -1,18 +1,23 @@
 import './global.css';
+
 import NavBar from '../components/NavBar';
 import { montserrat } from './fonts';
+import Provider from '../components/Provider';
 
 export const metadata = {
-    title: 'Dev Store',
-    description: 'You can shop coding shirts',
-    keywords: ['coding shirts', 'coding'],
+    title: 'Dev Style',
+    description: 'You can shop coding shirts from this website',
+    keywords: ['coding dress', 'coding shirts'],
 };
+
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className={`bg-gray-100 ${montserrat.className}`}>
-                <NavBar></NavBar>
-                {children}
+                <Provider>
+                    <NavBar />
+                    {children}
+                </Provider>
             </body>
         </html>
     );

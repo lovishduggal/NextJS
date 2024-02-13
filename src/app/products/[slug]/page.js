@@ -3,6 +3,7 @@ import ShareBtn from '../../../components/ShareBtn';
 import AddToCart from '../../../components/AddToCart';
 import { getProducts, getProductById } from '../../../services/productService';
 import Image from 'next/image';
+import { formatAmount } from '../../../utils/stripe';
 
 export async function generateStaticParams() {
     const products = await getProducts(10);
@@ -19,16 +20,26 @@ export async function generateMetadata({ params: { slug } }) {
 }
 const Product1 = async ({ params: { slug } }) => {
     const product = await getProductById(slug);
+    const clientProduct = {
+        name: product.name,
+        description: product.description,
+        id: product.id,
+        price: product.default_price.unit_amount,
+        price_id: product.default_price.id,
+        currency: 'INR',
+        image: product.images[0],
+    };
     return (
         <div className="m-2 px-20">
-            <div className="flex justify-around items-center flex-wrap gap-5">
+            <div className="flex justify-around items-center flex-wrap">
                 <div className="w-80 h-80">
                     <Image
                         priority
-                        width={160}
-                        height={160}
                         src={product.images[0]}
                         className="w-full h-auto"
+                        width={320}
+                        height={320}
+                        alt={product.name}
                     />
                 </div>
                 <div className="flex-1 max-w-md border rounded-md shadow-lg p-6 bg-white">
@@ -41,15 +52,13 @@ const Product1 = async ({ params: { slug } }) => {
                     <div className="mt-4 border-t pt-4">
                         <p className="text-gray-500">Price:</p>
                         <p className="text-xl font-semibold">
-                            {' '}
-                            ₹{product.default_price.unit_amount / 100}
+                            {formatAmount(product.default_price.unit_amount)}
                         </p>
                     </div>
-                    <AddToCart />
+                    <AddToCart product={clientProduct} />
                 </div>
             </div>
             <p className="mt-8 text-2xl">{product.description}</p>
-            
         </div>
     );
 };
